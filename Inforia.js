@@ -125,7 +125,8 @@ TwoPlayerPathGroupGameModel.prototype.getVertexState = function(pathIndex, verte
 }
 
 TwoPlayerPathGroupGameModel.prototype.equals = function(other) {
-	TwoPlayerPathGroupGameModel otherGame = (TwoPlayerPathGroupGameModel) other;
+	// TwoPlayerPathGroupGameModel otherGame = (TwoPlayerPathGroupGameModel) other;
+	var otherGame = other;
 	return this.getCurrentPlayer() == otherGame.getCurrentPlayer() && this.state.equals(otherGame.state);
 }
 
@@ -135,7 +136,7 @@ TwoPlayerPathGroupGameModel.prototype.toString = function(prefix, displayPathNum
 	for (var i = 0; i < this.getPathCount(); i++) {
 		if (displayPathNumber)
 			stringBuffer.push("path ", i, ":");
-		for (int j = 0; j < this.getVertexCount(i); j++)
+		for (var j = 0; j < this.getVertexCount(i); j++)
 			stringBuffer.push(" ", this.getVertexState(i, j));
 		stringBuffer.push("\n");
 	}
