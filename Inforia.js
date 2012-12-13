@@ -40,18 +40,8 @@ function TwoPlayerPathGroupGameModel() {
 
 	// An 2D-array representing the vertex state in the group of paths
     // protected int[][] state;
-
-	this._register();
 }
 util.inherits(TwoPlayerPathGroupGameModel, GameModel);
-TwoPlayerPathGroupGameModel.prototype._register = function() {
-	var self = this; // Set the variable "self" to avoid issues with scope and "this" in the callback
-	
-	/* Example:
-	// registry.register(this, function() { self.emit("created and registered", self });
-	// Register this instance and pass a callback to emit an event once registered.
-	*/
-}
 
 // Checks if a given index is a valid path index.
 TwoPlayerPathGroupGameModel.prototype.isValidPathIndex = function(index) {
@@ -150,6 +140,46 @@ function TwoPlayerPathGameModel() {
   TwoPlayerPathGameModel.super_.call(this);
 };
 util.inherits(TwoPlayerPathGameModel, TwoPlayerPathGroupGameModel);
+
+// Checks if a given index is a valid vertex index.
+TwoPlayerPathGameModel.prototype.isValidIndex = function(index) {
+	return isValidVertexIndex(0, index);
+}
+
+TwoPlayerPathGameModel.prototype.setVertexState = function(index, newState) {
+	if (!this.isValidIndex(index)) {
+		return false;
+	}
+	this.state[0][index] = newState;
+	return true;
+}
+
+// Check whether there exists a legal move for the current player at the specified vertex.
+// protected abstract boolean hasLegalMoveAtVertex(int index);
+TwoPlayerPathGameModel.prototype.hasLegalMoveAtVertex = function(index) {
+	return false;
+}
+
+TwoPlayerPathGameModel.prototype.hasLegalMoveAtVertex = function(pathIndex, vertexIndex) {
+	if (pathIndex != 0)
+		return false;
+	return hasLegalMoveAtVertex(vertexIndex);
+}
+
+TwoPlayerPathGameModel.prototype.startNewGame = function(state) { // int[]
+	// this.state = new int[1][state.length];
+	this.state = state;
+	// System.arraycopy(state, 0, this.state[0], 0, state.length);
+	this.currentPlayer = 1;
+}
+
+TwoPlayerPathGameModel.prototype.getVertexCount = function() {
+	return this.getVertexCount(0);
+}
+
+TwoPlayerPathGameModel.prototype.getVertexState = function(index) {
+	return this.getVertexState(0, index);
+}
 
 /* Usage
 // var Inforia = require('./Inforia.js');
