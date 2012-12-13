@@ -64,7 +64,7 @@ TwoPlayerPathGroupGameModel.prototype.isValidVertexIndex = function(pathIndex, v
 }
 
 // Checks whether there is a legal move for the current player at the specified vertex.
-TwoPlayerPathGroupGameModel.prototype.hasLegalMoveAtVertex = function(int pathIndex, int vertexIndex) {
+TwoPlayerPathGroupGameModel.prototype.hasLegalMoveAtVertex = function(pathIndex, vertexIndex) {
 	return false;
 }
 
