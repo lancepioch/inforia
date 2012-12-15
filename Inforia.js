@@ -137,7 +137,7 @@ TwoPlayerPathGroupGameModel.prototype.toString = function(prefix, displayPathNum
 
 // Class TwoPlayerPathGameModel
 function TwoPlayerPathGameModel() {
-  TwoPlayerPathGameModel.super_.call(this);
+	TwoPlayerPathGameModel.super_.call(this);
 };
 util.inherits(TwoPlayerPathGameModel, TwoPlayerPathGroupGameModel);
 
@@ -185,3 +185,84 @@ TwoPlayerPathGameModel.prototype.getVertexState = function(index) {
 // var Inforia = require('./Inforia.js');
 // var gamemodel = new Inforia.GameModel('Will');
 */
+
+
+// Examples
+
+// Class ToadsAndFrogsModel
+function ToadsAndFrogsModel() {
+	/**
+	 * ToadsAndFrogsModel describes the model component of the game Toads and Frogs. More information
+	 * about this game is available here:
+	 * http://en.wikipedia.org/wiki/Toads_and_Frogs_%28game%29
+	 */
+
+	ToadsAndFrogsModel.super_.call(this);
+	// Player description: Player 1(Left) - Toads; Player 2(Right) - Frogs.
+	// Vertex State description: 0 - Empty; 1 - Toad; 2 - Frog.
+
+	// A constant array containing the direction of movement for both players.
+	this.DELTA = [0, 1, -1];
+	// Default range for randomized number of boxes
+	this.DEFAULT_RANDOM_BOX_COUNT_RANGE = 7;
+	// Default minimum number of boxes
+	this.DEFAULT_MIN_BOX_COUNT = 8;
+	// Three possible states: Empty, Toad and Frog.
+	this.POSSIBLE_STATES_COUNT = 3;
+};
+util.inherits(ToadsAndFrogsModel, TwoPlayerPathGameModel);
+
+
+ToadsAndFrogsModel.prototype.startNewGame = function() {
+	Random randomNumberGenerator = new Random();
+	var boxCount = randomNumberGenerator.nextInt(DEFAULT_RANDOM_BOX_COUNT_RANGE) + DEFAULT_MIN_BOX_COUNT;
+	var initialState = new array(boxCount);
+	initialState[0] = 1;
+	initialState[boxCount - 1] = 2;
+	for (var i = 2; i < boxCount - 2; i++)
+		initialState[i] = Math.floor(Math.random() * POSSIBLE_STATES_COUNT);
+	this.startNewGame(initialState);
+}
+
+ToadsAndFrogsModel.prototype.getMoveDestination = function(index) {
+	if (!this.isValidIndex(index) || this.getVertexState(index) != this.getCurrentPlayer())
+		return -1;
+	var destinationIndex = index + DELTA[this.getCurrentPlayer()];
+	if (!this.isValidIndex(destinationIndex))
+		return -1;
+	if (this.isEmptyState(destinationIndex))
+		return destinationIndex;
+	if (this.getVertexState(destinationIndex) == this.getCurrentPlayer())
+		return -1;
+	destinationIndex += DELTA[this.getCurrentPlayer()];
+	if (!this.isValidIndex(destinationIndex) || !this.isEmptyState(destinationIndex))
+		return -1;
+	return destinationIndex;
+}
+
+ToadsAndFrogsModel.prototype.hasLegalMoveAtVertex = function(index) {
+	return this.isValidIndex(this.getMoveDestination(index));
+}
+
+// Moves a piece of the current player at a specified location.
+ToadsAndFrogsModel.prototype.makeMove = function(index) {
+	if (!this.hasLegalMoveAtVertex(index))
+		return false;
+	this.setVertexState(this.getMoveDestination(index), this.getCurrentPlayer());
+	this.setVertexState(index, 0);
+	return true;
+}
+
+// Returns if the specified box is empty (contains neither toad nor frog).
+ToadsAndFrogsModel.prototype.isEmptyState = function(index) {
+	return this.isValidIndex(index) && this.getVertexState(index) == 0;
+}
+
+// public GamePanel<?> getNewGamePanel(GameController controller) {
+ToadsAndFrogsModel.prototype.getNewGamePanel = function(controller){
+	return new ToadsAndFrogsPanel(this, controller);
+}
+
+ToadsAndFrogsModel.prototype.getGameName = function() {
+	return "Toads&Frogs";
+}
