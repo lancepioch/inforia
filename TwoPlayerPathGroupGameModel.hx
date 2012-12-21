@@ -43,7 +43,7 @@ class TwoPlayerPathGroupGameModel extends GameModel {
 		return false;
 	}
 
-	public function getVertexCount(index : Int) : Int {
+	public function getVertexCount(index : Int = 0) : Int {
 		if (this.isValidPathIndex(index))
 			return this.state[index].length;
 		return -1;
@@ -60,7 +60,7 @@ class TwoPlayerPathGroupGameModel extends GameModel {
 		return true;
 	}
 
-	public function getVertexState(pathIndex : Int, vertexIndex : Int) : Int {
+	public function getVertexState(pathIndex : Int = 0, vertexIndex : Int) : Int {
 		if (!this.isValidVertexIndex(pathIndex, vertexIndex))
 			return -1;
 		return this.state[pathIndex][vertexIndex];

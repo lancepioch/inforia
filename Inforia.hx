@@ -1,7 +1,7 @@
-import TwoPlayerPathGroupGameModel;
+import TwoPlayerPathGameModel;
 
 class Inforia {
 	public static function main(){
-		var gm = new TwoPlayerPathGroupGameModel();
+		var gm = new TwoPlayerPathGameModel();
 	}
 }
