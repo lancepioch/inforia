@@ -2,8 +2,7 @@ class GameModel {
     private var numberOfPlayers : Int;
     private var currentPlayer : Int;
 
-    // should be private aka abstract class
-	public function new() : Void {
+	private function new() : Void {
 		numberOfPlayers = 2;
 		currentPlayer = 0;
 	}
@@ -34,14 +33,17 @@ class GameModel {
 	public function getGameName() : String {
 		return this.toString();
 	}
+
+	public function toString() : String {
+		return "GameModel";
+	}
+
+	public function equals(other : Dynamic) : Bool {
+		return Type.typeof(this) == Type.typeof(other);
+	}
+
 	// public function getNewGamePanel(controller : GameController) : GamePanel<?>;
 	// public function loadAndContinueSavedGame(savedGameFile : File) : Void;
 	// public function saveCurrentProgress(saveFile : File) : Void;
     // public function accept(visitor : GameVisitor) : Void;
-	public function toString() : String {
-		return "GameModel";
-	}
-	public function equals(other : Dynamic) : Bool {
-		return Type.typeof(this) == Type.typeof(other);
-	}
 }
