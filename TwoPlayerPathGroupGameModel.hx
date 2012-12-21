@@ -3,7 +3,7 @@ import GameModel;
 class TwoPlayerPathGroupGameModel extends GameModel {
     private var state : Array<Array<Int>>; // Int[][]
 
-    public function new() {
+    private function new() {
     	super();
 		this.numberOfPlayers = 2;
 		currentPlayer = 0;
