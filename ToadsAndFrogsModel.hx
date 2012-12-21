@@ -15,8 +15,6 @@ class ToadsAndFrogsModel extends TwoPlayerPathGameModel {
 
     public function new() {
     	super();
-		this.numberOfPlayers = 2;
-		this.currentPlayer = 0;
 		this.DELTA = [1, -1];
 	}
 
@@ -32,10 +30,6 @@ class ToadsAndFrogsModel extends TwoPlayerPathGameModel {
 		for (i in 2...boxCount-2) // for (int i = 2; i < boxCount - 2; i++)
 			initialState[i] = Std.random(POSSIBLE_STATES_COUNT); // initialState[i] = randomNumberGenerator.nextInt(POSSIBLE_STATES_COUNT);
 		super.loadNewGame(initialState);
-	}
-
-	public override function toString() : String {
-		return this.toStringHelper("ToadAndFrog Game State:", false);
 	}
 
 	private function getMoveDestination(index : Int) {
@@ -62,17 +56,9 @@ class ToadsAndFrogsModel extends TwoPlayerPathGameModel {
 		return this.isValidIndex(this.getMoveDestination(index));
 	}
 
-	public override function doesCurrentPlayerHaveLegalMove() : Bool {
-		for (i in 0...this.getPathCount())
-			if (this.hasLegalMoveAtIndex(i))
-				return true;
-		return false;
-	}
-
 	public function makeMove(index : Int) : Bool {
-		if (!this.hasLegalMoveAtIndex(index)) {
+		if (!this.hasLegalMoveAtIndex(index))
 			return false;
-		}
 		this.setIndexState(this.getMoveDestination(index), this.getCurrentPlayer() + 1);
 		this.setIndexState(index, 0);
 		return true;
@@ -85,6 +71,10 @@ class ToadsAndFrogsModel extends TwoPlayerPathGameModel {
 	/*public override function getNewGamePanel(controller : GameController) : GamePanel<?> {
 		return new ToadsAndFrogsPanel(this, controller);
 	}//*/
+
+	public override function toString() : String {
+		return this.toStringHelper("ToadAndFrog Game State:", false);
+	}
 
 	public override function getGameName() : String {
 		return "Toads and Frogs";

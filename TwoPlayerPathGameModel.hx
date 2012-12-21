@@ -3,12 +3,15 @@ import TwoPlayerPathGroupGameModel;
 class TwoPlayerPathGameModel extends TwoPlayerPathGroupGameModel {
 	public function new() {
     	super();
-		this.numberOfPlayers = 2;
-		currentPlayer = 0;
+		this.state.push(new Array<Int>());
 	}
 
 	private function isValidIndex(index : Int) : Bool  {
 		return super.isValidVertexIndex(0, index);
+	}
+
+	public function getIndexState(index : Int) : Int {
+		return super.getVertexState(0, index);
 	}
 
 	private function setIndexState(index : Int, newState : Int) : Bool  { // setVertexState
@@ -22,12 +25,6 @@ class TwoPlayerPathGameModel extends TwoPlayerPathGroupGameModel {
 		return hasLegalMoveAtVertex(0, index);
 	}
 
-	private override function hasLegalMoveAtVertex(pathIndex : Int, vertexIndex : Int) : Bool {
-		if (pathIndex != 0)
-			return false;
-		return super.hasLegalMoveAtVertex(pathIndex, vertexIndex);
-	}
-
 	public function loadNewGame(state : Array<Int>) : Void {
 		this.state = new Array<Array<Int>>(); // this.state = new int[1][state.length];
 		// System.arraycopy(state, 0, this.state[0], 0, state.length);
@@ -35,15 +32,26 @@ class TwoPlayerPathGameModel extends TwoPlayerPathGroupGameModel {
 		this.currentPlayer = 0;
 	}
 
+	private override function hasLegalMoveAtVertex(pathIndex : Int, vertexIndex : Int) : Bool {
+		if (pathIndex != 0)
+			return false;
+		return super.hasLegalMoveAtVertex(pathIndex, vertexIndex);
+	}
+
+	public override function doesCurrentPlayerHaveLegalMove() : Bool {
+		for (i in 0...this.getVertexCount(0)) {
+			if (this.hasLegalMoveAtIndex(i))
+				return true;
+			trace("Total vertices: " + this.getVertexCount(0));
+			}
+		return false;
+	}
+
 	public override function startNewGame() : Void {
 		this.state = new Array<Array<Int>>(); // this.state = new int[1][state.length];
 		// System.arraycopy(state, 0, this.state[0], 0, state.length);
 		// this.state[0] = state.slice(0, state.length);
 		this.currentPlayer = 0;
-	}
-
-	public function getIndexState(index : Int) : Int {
-		return super.getVertexState(0, index);
 	}
 
 }
