@@ -1,1 +1,5 @@
-Node.js Game Library
+Node.js Game Library using Haxe
+
+```
+haxe build.hxml
+```
