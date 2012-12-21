@@ -62,6 +62,13 @@ class ToadsAndFrogsModel extends TwoPlayerPathGameModel {
 		return this.isValidIndex(this.getMoveDestination(index));
 	}
 
+	public override function doesCurrentPlayerHaveLegalMove() : Bool {
+		for (i in 0...this.getPathCount())
+			if (this.hasLegalMoveAtIndex(i))
+				return true;
+		return false;
+	}
+
 	public function makeMove(index : Int) : Bool {
 		if (!this.hasLegalMoveAtIndex(index)) {
 			return false;
