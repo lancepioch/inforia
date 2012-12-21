@@ -73,10 +73,7 @@ class TwoPlayerPathGroupGameModel extends GameModel {
 		return this.getCurrentPlayer() == otherGame.getCurrentPlayer(); // && this.state.equals(otherGame.state);
 	}
 
-	public override function toString() : String {
-		var prefix : String = "";
-		var displayPathNumber : Bool = true;
-
+	public function toStringHelper(prefix : String = "", displayPathNumber : Bool = false) : String {
 		var stringBuffer = new StringBuf();
 
 		stringBuffer.add(prefix);
@@ -94,6 +91,10 @@ class TwoPlayerPathGroupGameModel extends GameModel {
 		}
 		stringBuffer.add("\n");
 		return stringBuffer.toString();
+	}
+
+	public override function toString() : String {
+		return this.toStringHelper("TwoPlayerPathGroupGameModel", true);
 	}
 
 }

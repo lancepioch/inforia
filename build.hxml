@@ -10,5 +10,7 @@
 # -D nodejs 
 
 # Output
--main Inforia.hx
+-lib nodejs
+-D nodejs
 -js game.js
+-main Inforia

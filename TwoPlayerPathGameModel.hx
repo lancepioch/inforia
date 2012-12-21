@@ -11,7 +11,7 @@ class TwoPlayerPathGameModel extends TwoPlayerPathGroupGameModel {
 		return super.isValidVertexIndex(0, index);
 	}
 
-	private function setState(index : Int, newState : Int) : Bool  { // setVertexState
+	private function setIndexState(index : Int, newState : Int) : Bool  { // setVertexState
 		if (!this.isValidIndex(index))
 			return false;
 		this.state[0][index] = newState;
@@ -19,7 +19,7 @@ class TwoPlayerPathGameModel extends TwoPlayerPathGroupGameModel {
 	}
 
 	private function hasLegalMoveAtIndex(index : Int) : Bool { // abstract
-		return false;
+		return hasLegalMoveAtVertex(0, index);
 	}
 
 	private override function hasLegalMoveAtVertex(pathIndex : Int, vertexIndex : Int) : Bool {
@@ -35,7 +35,7 @@ class TwoPlayerPathGameModel extends TwoPlayerPathGroupGameModel {
 		this.currentPlayer = 1;
 	}
 
-	public function getState(index : Int) : Int {
+	public function getIndexState(index : Int) : Int {
 		return super.getVertexState(0, index);
 	}
 
