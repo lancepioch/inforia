@@ -28,7 +28,7 @@ class TwoPlayerPathGroupGameModel extends GameModel {
 		return vertexCountInPath;
 	}
 
-	public function startNewGame(vertexCountInPath : Array<Int>) : Void {
+	public function startNewGame() : Void {
 		this.state = new Array<Array<Int>>(); // vertexCountInPath.length
 		for (i in 0...this.getPathCount())
 			this.state[i] = new Array<Int>(); // vertexCountInPath[i]);

@@ -28,11 +28,18 @@ class TwoPlayerPathGameModel extends TwoPlayerPathGroupGameModel {
 		return super.hasLegalMoveAtVertex(pathIndex, vertexIndex);
 	}
 
-	public override function startNewGame(state : Array<Int>) : Void {
+	public function loadNewGame(state : Array<Int>) : Void {
 		this.state = new Array<Array<Int>>(); // this.state = new int[1][state.length];
 		// System.arraycopy(state, 0, this.state[0], 0, state.length);
 		this.state[0] = state.slice(0, state.length);
-		this.currentPlayer = 1;
+		this.currentPlayer = 0;
+	}
+
+	public override function startNewGame() : Void {
+		this.state = new Array<Array<Int>>(); // this.state = new int[1][state.length];
+		// System.arraycopy(state, 0, this.state[0], 0, state.length);
+		// this.state[0] = state.slice(0, state.length);
+		this.currentPlayer = 0;
 	}
 
 	public function getIndexState(index : Int) : Int {

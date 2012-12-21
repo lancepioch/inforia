@@ -18,7 +18,9 @@ class ToadsAndFrogsModel extends TwoPlayerPathGameModel {
 		this.numberOfPlayers = 2;
 		this.currentPlayer = 0;
 		this.DELTA = [0, 1, -1];
+	}
 
+	public override function startNewGame() : Void {
 		// int boxCount = randomNumberGenerator.nextInt(DEFAULT_RANDOM_BOX_COUNT_RANGE) + DEFAULT_MIN_BOX_COUNT;
 		var boxCount = Std.random(DEFAULT_RANDOM_BOX_COUNT_RANGE) + DEFAULT_MIN_BOX_COUNT;
 		var initialState = new Array<Int>();
@@ -29,7 +31,7 @@ class ToadsAndFrogsModel extends TwoPlayerPathGameModel {
 		
 		for (i in 2...boxCount-2) // for (int i = 2; i < boxCount - 2; i++)
 			initialState[i] = Std.random(POSSIBLE_STATES_COUNT); // initialState[i] = randomNumberGenerator.nextInt(POSSIBLE_STATES_COUNT);
-		this.startNewGame(initialState);
+		super.loadNewGame(initialState);
 	}
 
 	public override function toString() : String {

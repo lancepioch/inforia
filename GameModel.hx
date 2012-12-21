@@ -17,8 +17,8 @@ class GameModel {
 
 	private function getNextPlayer() : Int {
 		var nextPlayer = this.currentPlayer + 1;
-		if (nextPlayer > this.numberOfPlayers)
-			nextPlayer = 1;
+		if (nextPlayer > this.numberOfPlayers - 1)
+			nextPlayer = 0;
 		return nextPlayer;
 	}
 
