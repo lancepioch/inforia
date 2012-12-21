@@ -17,7 +17,7 @@ class ToadsAndFrogsModel extends TwoPlayerPathGameModel {
     	super();
 		this.numberOfPlayers = 2;
 		this.currentPlayer = 0;
-		this.DELTA = [0, 1, -1];
+		this.DELTA = [1, -1];
 	}
 
 	public override function startNewGame() : Void {
@@ -39,20 +39,23 @@ class ToadsAndFrogsModel extends TwoPlayerPathGameModel {
 	}
 
 	private function getMoveDestination(index : Int) {
-		if (!this.isValidIndex(index) || this.getIndexState(index) != this.getCurrentPlayer())
+		if (!this.isValidIndex(index) || this.getIndexState(index) != this.getCurrentPlayer() + 1)
 			return -1;
-		var destinationIndex = index + DELTA[this.getCurrentPlayer()];
+		var destinationIndex = 0 + index + DELTA[this.getCurrentPlayer()];
 		if (!this.isValidIndex(destinationIndex))
 			return -1;
-		if (this.isEmptyState(destinationIndex))
+		if (this.isEmptyState(destinationIndex)){
 			return destinationIndex;
-		else if (this.getIndexState(destinationIndex) == this.getCurrentPlayer())
+		}
+		else if (this.getIndexState(destinationIndex) == this.getCurrentPlayer() + 1){
 			return -1;
-		// else {
-		destinationIndex += DELTA[this.getCurrentPlayer()];
-		if (!this.isValidIndex(destinationIndex) || !this.isEmptyState(destinationIndex))
-			return -1;
-		return destinationIndex;
+		}
+		else {
+			destinationIndex += DELTA[this.getCurrentPlayer()];
+			if (!this.isValidIndex(destinationIndex) || !this.isEmptyState(destinationIndex))
+				return -1;
+			return destinationIndex;
+		}
 	}
 
 	public override function hasLegalMoveAtIndex(index : Int) : Bool {
@@ -63,7 +66,7 @@ class ToadsAndFrogsModel extends TwoPlayerPathGameModel {
 		if (!this.hasLegalMoveAtIndex(index)) {
 			return false;
 		}
-		this.setIndexState(this.getMoveDestination(index), this.getCurrentPlayer());
+		this.setIndexState(this.getMoveDestination(index), this.getCurrentPlayer() + 1);
 		this.setIndexState(index, 0);
 		return true;
 	}

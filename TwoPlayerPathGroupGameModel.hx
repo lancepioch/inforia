@@ -7,6 +7,7 @@ class TwoPlayerPathGroupGameModel extends GameModel {
     	super();
 		this.numberOfPlayers = 2;
 		currentPlayer = 0;
+		this.state = new Array<Array<Int>>();
 	}
 
 	private function isValidPathIndex(index : Int) : Bool {
@@ -28,7 +29,7 @@ class TwoPlayerPathGroupGameModel extends GameModel {
 		return vertexCountInPath;
 	}
 
-	public function startNewGame() : Void {
+	public override function startNewGame() : Void {
 		this.state = new Array<Array<Int>>(); // vertexCountInPath.length
 		for (i in 0...this.getPathCount())
 			this.state[i] = new Array<Int>(); // vertexCountInPath[i]);
@@ -89,6 +90,8 @@ class TwoPlayerPathGroupGameModel extends GameModel {
 			}
 			stringBuffer.add("\n");
 		}
+		stringBuffer.add("Current Player: ");
+		stringBuffer.add(this.getCurrentPlayer());
 		stringBuffer.add("\n");
 		return stringBuffer.toString();
 	}

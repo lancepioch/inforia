@@ -22,7 +22,7 @@ class GameModel {
 		return nextPlayer;
 	}
 
-	private function doesCurrentPlayerHaveLegalMove() : Bool {
+	public function doesCurrentPlayerHaveLegalMove() : Bool {
 		return false;
 	}
 
@@ -40,6 +40,11 @@ class GameModel {
 
 	public function equals(other : Dynamic) : Bool {
 		return Type.typeof(this) == Type.typeof(other);
+	}
+
+	public function startNewGame() : Void {
+		this.currentPlayer = 0;
+		this.numberOfPlayers = 2;
 	}
 
 	// public function getNewGamePanel(controller : GameController) : GamePanel<?>;
