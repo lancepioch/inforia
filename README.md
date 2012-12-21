@@ -1,4 +1,4 @@
-Node.js [0.8.1] Game Library using Haxe [2.10]
+Node.js [0.8.16] Game Library using Haxe [2.10] with haxenode (nodejs) [0.8.1] and nodejs_externs: [0.4]
 
 Required:
 ```
