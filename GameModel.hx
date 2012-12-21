@@ -45,5 +45,8 @@ class GameModel {
 	// public function getNewGamePanel(controller : GameController) : GamePanel<?>;
 	// public function loadAndContinueSavedGame(savedGameFile : File) : Void;
 	// public function saveCurrentProgress(saveFile : File) : Void;
-    // public function accept(visitor : GameVisitor) : Void;
+	
+    /* public function accept(visitor : GameVisitor) : Void {
+        visitor.visit(this);
+    } // */
 }
