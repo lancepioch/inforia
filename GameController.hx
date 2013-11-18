@@ -37,6 +37,6 @@ class GameController {
 	}
 
 	public function toString() : String {
-		return "Root Game Controller.";
+		return this.model.toString();
 	}
 }
