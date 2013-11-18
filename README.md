@@ -1,4 +1,4 @@
-Node.js [0.8.16] Game Library using Haxe [3.01] with haxenode (nodejs) [2.0.1]
+Node.js [0.10.17] Game Library using Haxe [3.01] with haxenode (nodejs) [2.0.1]
 
 Required:
 ```
