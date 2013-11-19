@@ -1,6 +1,3 @@
-import TwoPlayerPathGameModel;
-import Std;
-
 class ToadsAndFrogsModel extends TwoPlayerPathGameModel {
 	/*
 	 * Player description: Player 0 (Left) - Toads; Player 1 (Right) - Frogs.
@@ -56,7 +53,7 @@ class ToadsAndFrogsModel extends TwoPlayerPathGameModel {
 		return this.isValidIndex(this.getMoveDestination(index));
 	}
 
-	public function makeMove(index : Int) : Bool {
+	public override function makeMove(index : Int) : Bool {
 		if (!this.hasLegalMoveAtIndex(index))
 			return false;
 		this.setIndexState(this.getMoveDestination(index), this.getCurrentPlayer() + 1);
@@ -67,10 +64,6 @@ class ToadsAndFrogsModel extends TwoPlayerPathGameModel {
 	private function isEmptyState(index : Int) : Bool {
 		return this.isValidIndex(index) && this.getIndexState(index) == 0;
 	}
-
-	/*public override function getNewGamePanel(controller : GameController) : GamePanel<?> {
-		return new ToadsAndFrogsPanel(this, controller);
-	}//*/
 
 	public override function toString() : String {
 		return this.toStringHelper("ToadAndFrog Game State:", false);

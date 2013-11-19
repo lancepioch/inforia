@@ -26,6 +26,10 @@ class GameModel {
 		return false;
 	}
 
+	public function makeMove(index : Int) : Bool {
+		return true;
+	}
+
 	public function switchToNextTurn() : Void {
 		this.currentPlayer = this.getNextPlayer();
 	}
