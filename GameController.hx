@@ -36,6 +36,22 @@ class GameController {
 		trace("giving up");
 	}
 
+	public function processQuery(query : Dynamic) {
+		if (query.newgame == "true")
+			this.startNewGame();
+
+		if (query.move >= 0){
+			var moves = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+			if (this.model.makeMove(moves[query.move])){
+				this.gameMoveMade();
+				trace('Successful Move');
+			}
+			else {
+				trace('Move not made...');
+			}
+		}
+	}
+
 	public function toString() : String {
 		return this.model.toString();
 	}
